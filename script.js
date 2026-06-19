@@ -34,63 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // 3. Обработка формы контактов — отправка уведомления в Telegram
-    const form = document.getElementById('contactForm');
-    if (!form) return;
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const name    = document.getElementById('form-name').value.trim();
-        const contact = document.getElementById('form-contact').value.trim();
-        const message = document.getElementById('form-message').value.trim();
-        const btn     = document.getElementById('submitBtn');
-        const status  = document.getElementById('formStatus');
-
-        // Блокируем кнопку на время отправки
-        btn.disabled = true;
-        btn.textContent = 'Отправляю...';
-        status.style.display = 'none';
-
-        const text =
-            `📬 *Новая заявка с портфолио!*\n\n` +
-            `👤 *Имя:* ${name}\n` +
-            `📱 *Контакт:* ${contact}\n` +
-            `💬 *Сообщение:*\n${message}`;
-
-        try {
-            const response = await fetch(
-                `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: ADMIN_CHAT_ID,
-                        text: text,
-                        parse_mode: 'Markdown'
-                    })
-                }
-            );
-
-            const result = await response.json();
-
-            if (result.ok) {
-                form.reset();
-                status.style.display = 'block';
-                status.style.color = 'var(--accent)';
-                status.textContent = '✅ Заявка отправлена! Я свяжусь с вами в ближайшее время.';
-            } else {
-                throw new Error(result.description);
-            }
-        } catch (err) {
-            status.style.display = 'block';
-            status.style.color = '#ff4d4d';
-            status.textContent = '❌ Ошибка отправки. Напишите мне напрямую в Telegram.';
-            console.error('Telegram API error:', err);
-        } finally {
-            btn.disabled = false;
-            btn.textContent = 'Отправить заявку';
-        }
-    });
 
 });
