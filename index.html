@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Web Developer</title>
+    <meta name="description" content="Современное портфолио Senior Frontend Developer">
+    
+    <!-- Подключение шрифтов (Google Fonts: Outfit для заголовков, Inter для текста) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!-- Навигация с эффектом Glassmorphism -->
+    <header class="header glass" id="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">Dev<span class="accent">.</span></a>
+                <ul class="nav-links">
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#projects">Кейсы</a></li>
+                    <li><a href="#contact" class="btn btn-primary">Связаться</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Главный экран (Hero) -->
+        <section id="hero" class="hero section">
+            <!-- Абстрактное свечение на фоне (Vanilla CSS) -->
+            <div class="hero-glow"></div>
+            <div class="hero-glow hero-glow-secondary"></div>
+            
+            <div class="container relative">
+                <div class="hero-content fade-up">
+                    <h1 class="hero-title">
+                        Создаю <span class="accent">веб-решения</span> и ИИ-ассистентов,<br>
+                        которые приносят результат
+                    </h1>
+                    <p class="hero-subtitle">
+                        Разработка сайтов под ключ, Telegram-боты, интеграция ИИ.
+                    </p>
+                    <div class="hero-actions fade-up" style="transition-delay: 200ms;">
+                        <a href="#projects" class="btn btn-primary">Смотреть работы</a>
+                        <a href="#contact" class="btn btn-secondary glass">Обсудить проект</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция Услуг -->
+        <section id="services" class="services section">
+            <div class="container">
+                <h2 class="section-title fade-up">Что я предлагаю</h2>
+                <div class="grid services-grid">
+                    <div class="service-card glass fade-up" style="transition-delay: 0ms;">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        </div>
+                        <h3>Разработка сайтов</h3>
+                        <p>От конверсионных лендингов для бизнеса до многостраничных платформ.</p>
+                    </div>
+
+                    <div class="service-card glass fade-up" style="transition-delay: 100ms;">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <h3>Автоматизация & Telegram-боты</h3>
+                        <p>Разработка ботов для записи клиентов, интеграция с Google Sheets (Python, aiogram, FastAPI).</p>
+                    </div>
+
+                    <div class="service-card glass fade-up" style="transition-delay: 200ms;">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                        </div>
+                        <h3>ИИ-интеграции</h3>
+                        <p>Внедрение AI-ассистентов для автоматизации продаж и поддержки пользователей.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция проектов (Glassmorphism Карточки) -->
+        <section id="projects" class="projects section">
+            <div class="container">
+                <h2 class="section-title fade-up">Избранные проекты</h2>
+                <div class="grid projects-grid">
+                    <article class="card glass fade-up project-card" style="transition-delay: 0ms;">
+                        <div class="card-image-wrapper">
+                            <div class="card-image">
+                                <img src="./img1.png" alt="Детейлинг-студия" class="project-img">
+                            </div>
+                            <div class="card-overlay">
+                                <a href="https://deteiling-site.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Посмотреть Live</a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Детейлинг-студия</h3>
+                            <p>Лендинг для студии автодетейлинга. Фокус на премиальном визуале и форме записи.</p>
+                        </div>
+                    </article>
+                    
+                    <article class="card glass fade-up project-card" style="transition-delay: 100ms;">
+                        <div class="card-image-wrapper">
+                            <div class="card-image">
+                                <img src="./img2.png" alt="Студия ландшафтного дизайна" class="project-img">
+                            </div>
+                            <div class="card-overlay">
+                                <a href="https://landsh-diz.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Посмотреть Live</a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Студия ландшафтного дизайна</h3>
+                            <p>Сайт-визитка с презентацией услуг по озеленению и благоустройству.</p>
+                        </div>
+                    </article>
+
+                    <article class="card glass fade-up project-card" style="transition-delay: 200ms;">
+                        <div class="card-image-wrapper">
+                            <div class="card-image">
+                                <img src="./img3.png" alt="Фитнес-клуб" class="project-img">
+                            </div>
+                            <div class="card-overlay">
+                                <a href="https://fitnes-site-rust.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Посмотреть Live</a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Фитнес-клуб</h3>
+                            <p>Платформа для фитнес-центра с расписанием и презентацией залов.</p>
+                        </div>
+                    </article>
+
+                    <article class="card glass fade-up project-card" style="transition-delay: 300ms;">
+                        <div class="card-image-wrapper">
+                            <div class="card-image">
+                                <img src="./img4.png" alt="Клиника Smiloradent" class="project-img">
+                            </div>
+                            <div class="card-overlay">
+                                <a href="https://smiloradent.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Посмотреть Live</a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Клиника "Smiloradent"</h3>
+                            <p>Сайт для медицинской ниши с упором на доверие пациентов и удобный интерфейс.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- Секция Контактов -->
+        <section id="contact" class="contact section">
+            <div class="container">
+                <div class="contact-wrapper glass fade-up" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: var(--space-xl) var(--space-md);">
+                    <div class="contact-info">
+                        <h2 class="section-title" style="margin-bottom: 1rem;">Готовы обсудить проект?</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Напишите мне напрямую в мессенджер.</p>
+                        
+                        <div class="social-links" style="align-items: center; justify-content: center; margin-top: var(--space-md);">
+                            <a href="https://t.me/eldarAitg" target="_blank" rel="noopener noreferrer" class="social-link btn btn-primary" style="padding: 1rem 2.5rem; border-radius: 8px; font-size: 1.1rem; color: var(--bg-base) !important;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                Написать в Telegram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Developer Portfolio. Создано с акцентом на <a href="https://github.com/your_github/portfolio" target="_blank" rel="noopener noreferrer" class="footer-link">минимализм и эстетику</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>

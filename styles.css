@@ -1,0 +1,462 @@
+/* --- 1. Root Variables (Дизайн-токены) --- */
+:root {
+    /* Цветовая палитра - Dark Mode (Clean Tech / Minimalist) */
+    --bg-base: #0a0a0a;
+    --bg-surface: #141414;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    
+    /* Неоновый/Электрический акцент для современного стиля */
+    --accent: #00ff88;
+    --accent-hover: #00cc6a;
+    
+    /* Эффект Glassmorphism */
+    --glass-bg: rgba(20, 20, 20, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-blur: 16px;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+    /* Типографика (согласно taste-skill) */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Отступы и интерлиньяж (Выверенная эстетика) */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2.5rem;
+    --space-lg: 5rem;
+    --space-xl: 10rem;
+
+    /* Микроанимации (ui-ux-pro-max-skill) */
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- 2. Базовый сброс и типографика --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .logo {
+    font-family: var(--font-heading);
+    line-height: 1.1;
+    color: var(--text-primary);
+}
+
+.accent {
+    color: var(--accent);
+}
+
+/* --- 3. Структура и Layout --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+.section {
+    padding: var(--space-xl) 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+}
+
+/* --- 4. Компоненты --- */
+
+/* Glass Утилита */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+}
+
+/* Навигация */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: var(--space-sm) 0;
+    transition: transform var(--transition-smooth), padding var(--transition-smooth);
+}
+
+.header.scrolled {
+    padding: var(--space-xs) 0;
+    box-shadow: var(--glass-shadow);
+    background: rgba(10, 10, 10, 0.8);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+
+/* Кнопки (Легкий Нео-брутализм) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: var(--font-body);
+    transition: all var(--transition-bounce);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--bg-base) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border-color: var(--glass-border);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-4px);
+}
+
+/* Утилиты Layout */
+.relative {
+    position: relative;
+    z-index: 10;
+}
+
+/* Главный экран */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--space-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Абстрактное свечение на фоне */
+.hero-glow {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+    top: -20%;
+    left: -10%;
+    border-radius: 50%;
+    z-index: 0;
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+.hero-glow-secondary {
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    top: 40%;
+    left: 50%;
+    width: 50vw;
+    height: 50vw;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-sm);
+    line-height: 1.05;
+    font-weight: 800;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    color: var(--text-secondary);
+    max-width: 650px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+/* Общие заголовки секций */
+.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+/* Секция Услуг */
+.service-card {
+    padding: var(--space-md);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform var(--transition-bounce), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.08);
+}
+
+.service-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
+    transition: transform var(--transition-bounce), background var(--transition-fast);
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1) rotate(-5deg);
+    background: rgba(0, 255, 136, 0.15);
+}
+
+.service-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: var(--space-xs);
+}
+
+.service-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Карточки проектов */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform var(--transition-bounce), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.1);
+}
+
+.card-image-wrapper {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-smooth), filter var(--transition-smooth);
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+}
+
+.card:hover .card-image {
+    transform: scale(1.05);
+    filter: blur(2px);
+}
+
+.card:hover .card-overlay {
+    opacity: 1;
+}
+
+/* Уменьшенная кнопка для карточки */
+.btn-sm {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all var(--transition-bounce);
+}
+
+.card:hover .btn-sm {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-content {
+    padding: var(--space-md);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h3 {
+    margin-bottom: var(--space-xs);
+    font-size: 1.4rem;
+    transition: color var(--transition-fast);
+}
+
+.card:hover .card-content h3 {
+    color: var(--accent);
+}
+
+.card-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- Секция Контактов --- */
+.contact-wrapper {
+    border-radius: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.social-link:hover {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+
+/* Подвал */
+.footer {
+    padding: var(--space-md) 0;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: var(--space-xl);
+}
+
+.footer-link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+/* --- 6. Адаптивность (Mobile-First) --- */
+@media (min-width: 768px) {
+    .contact-wrapper {
+        padding: var(--space-lg);
+    }
+    
+    .social-links {
+        flex-direction: row;
+        gap: var(--space-md);
+    }
+}
+
+/* --- 5. Анимации при скролле --- */
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
