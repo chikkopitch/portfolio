@@ -488,7 +488,7 @@ h1, h2, h3, h4, .logo {
 /* --- Адаптивность (Mobile-First) --- */
 @media (min-width: 768px) {
     .contact-wrapper {
-        grid-template-columns: 1fr 1.2fr;
+        grid-template-columns: 1fr;
         gap: var(--space-lg);
         padding: var(--space-lg);
     }
@@ -496,6 +496,7 @@ h1, h2, h3, h4, .logo {
     .social-links {
         flex-direction: row;
         gap: var(--space-md);
+        justify-content: center;
     }
 }
 
