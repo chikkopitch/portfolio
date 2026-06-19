@@ -389,8 +389,12 @@ h1, h2, h3, h4, .logo {
 
 /* --- Секция Контактов --- */
 .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    padding: var(--space-md);
     border-radius: 16px;
-    max-width: 800px;
+    max-width: 960px;
     margin: 0 auto;
 }
 
@@ -416,6 +420,50 @@ h1, h2, h3, h4, .logo {
     transform: translateX(4px);
 }
 
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 1rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 0 4px rgba(0, 255, 136, 0.15);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
 
 /* Подвал */
 .footer {
@@ -437,12 +485,14 @@ h1, h2, h3, h4, .logo {
     text-decoration: underline;
 }
 
-/* --- 6. Адаптивность (Mobile-First) --- */
+/* --- Адаптивность (Mobile-First) --- */
 @media (min-width: 768px) {
     .contact-wrapper {
+        grid-template-columns: 1fr 1.2fr;
+        gap: var(--space-lg);
         padding: var(--space-lg);
     }
-    
+
     .social-links {
         flex-direction: row;
         gap: var(--space-md);

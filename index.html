@@ -154,21 +154,39 @@
         <!-- Секция Контактов -->
         <section id="contact" class="contact section">
             <div class="container">
-                <div class="contact-wrapper glass fade-up" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: var(--space-xl) var(--space-md);">
+                <div class="contact-wrapper glass fade-up">
                     <div class="contact-info">
-                        <h2 class="section-title" style="margin-bottom: 1rem;">Готовы обсудить проект?</h2>
-                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Напишите мне напрямую в мессенджер.</p>
-                        
-                        <div class="social-links" style="align-items: center; justify-content: center; margin-top: var(--space-md);">
-                            <a href="https://t.me/eldarAitg" target="_blank" rel="noopener noreferrer" class="social-link btn btn-primary" style="padding: 1rem 2.5rem; border-radius: 8px; font-size: 1.1rem; color: var(--bg-base) !important;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        <h2 class="section-title" style="text-align: left; margin-bottom: 1rem;">Готовы обсудить проект?</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Заполните форму или напишите мне напрямую в мессенджер.</p>
+
+                        <div class="social-links">
+                            <a href="https://t.me/eldarAitg" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                                 Написать в Telegram
                             </a>
                         </div>
                     </div>
+
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="form-name">Имя</label>
+                            <input type="text" id="form-name" name="name" placeholder="Как к вам обращаться?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-contact">Telegram / Email</label>
+                            <input type="text" id="form-contact" name="contact" placeholder="Куда ответить?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-message">Сообщение</label>
+                            <textarea id="form-message" name="message" rows="4" placeholder="Кратко опишите задачу..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Отправить заявку</button>
+                        <p id="formStatus" style="display:none; margin-top: 0.75rem; font-size: 0.9rem;"></p>
+                    </form>
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Подвал -->
