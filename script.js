@@ -34,6 +34,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+    // 3. Mock Chat Animation
+    const mockChatContainer = document.getElementById('mockChatContainer');
+    const mockChatBox = document.getElementById('mockChatBox');
+    
+    if (mockChatContainer && mockChatBox) {
+        const messages = [
+            { type: 'client', text: 'Здравствуйте! Сколько будет стоить разводка отопления в доме 120 м²?' },
+            { type: 'typing', delay: 1500 },
+            { type: 'bot', text: 'Здравствуйте! Разводка отопления под ключ — от 180 000 ₽, точная сумма зависит от схемы и материалов. Оставите контакты — специалист посчитает смету и перезвонит.' },
+            { type: 'typing', delay: 800 },
+            { type: 'bot', text: 'Как вас зовут и какой номер для связи?' },
+            { type: 'client', text: 'Игорь, +7 951 ХХХ-ХХ-ХХ' },
+            { type: 'system', text: 'Заявка отправлена администратору ✅' }
+        ];
 
+        let chatAnimationSeq = 0;
+        let isVisible = false;
+
+        const playChatAnimation = async (seq) => {
+            const wait = (ms) => new Promise(res => setTimeout(res, ms));
+
+            while (isVisible && chatAnimationSeq === seq) {
+                mockChatBox.innerHTML = '';
+                await wait(500);
+
+                for (let i = 0; i < messages.length; i++) {
+                    if (!isVisible || chatAnimationSeq !== seq) return;
+                    
+                    const msg = messages[i];
+                    
+                    if (msg.type === 'typing') {
+                        const typingDiv = document.createElement('div');
+                        typingDiv.className = 'chat-msg bot typing-msg';
+                        typingDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+                        mockChatBox.appendChild(typingDiv);
+                        
+                        void typingDiv.offsetWidth;
+                        typingDiv.classList.add('visible');
+                        
+                        await wait(msg.delay || 1500);
+                        
+                        if (!isVisible || chatAnimationSeq !== seq) return;
+                        typingDiv.remove();
+                    } else {
+                        const div = document.createElement('div');
+                        div.className = `chat-msg ${msg.type}`;
+                        div.textContent = msg.text;
+                        mockChatBox.appendChild(div);
+                        
+                        void div.offsetWidth;
+                        div.classList.add('visible');
+                        
+                        await wait(1200);
+                    }
+                }
+                
+                await wait(3000); // Wait before repeating
+            }
+        };
+
+        const chatObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!isVisible) {
+                        isVisible = true;
+                        chatAnimationSeq++;
+                        playChatAnimation(chatAnimationSeq);
+                    }
+                } else {
+                    isVisible = false;
+                    chatAnimationSeq++; // Cancel pending sequence
+                }
+            });
+        }, { threshold: 0.1 });
+
+        chatObserver.observe(mockChatContainer);
+    }
 
 });
