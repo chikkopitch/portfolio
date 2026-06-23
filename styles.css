@@ -52,6 +52,19 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input, 
+textarea,
+[contenteditable="true"] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 h1, h2, h3, h4, .logo {
@@ -308,14 +321,15 @@ h1, h2, h3, h4, .logo {
 
 .card-image-wrapper {
     position: relative;
-    height: 240px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
+    background-color: #141414;
 }
 
 .card-image {
     width: 100%;
     height: 100%;
-    background-color: var(--bg-surface);
+    background-color: #141414;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -325,7 +339,7 @@ h1, h2, h3, h4, .logo {
 .project-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
 }
 

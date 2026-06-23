@@ -6,6 +6,22 @@ const ADMIN_CHAT_ID = '1250232776';
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Защита от копирования контента ---
+    document.addEventListener('contextmenu', (e) => {
+        if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        const isCmdOrCtrl = isMac ? e.metaKey : e.ctrlKey;
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (isCmdOrCtrl && ['c', 'x', 'a', 'u', 's', 'p'].includes(e.key.toLowerCase())) {
+            e.preventDefault();
+        }
+    });
+
     // 1. Анимация Header'а при скролле (Glassmorphism эффект)
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
