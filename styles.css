@@ -41,16 +41,15 @@
 }
 
 html {
-    scroll-behavior: smooth;
     font-size: 16px;
 }
 
 body {
+    margin: 0;
     background-color: var(--bg-base);
     color: var(--text-primary);
     font-family: var(--font-body);
     line-height: 1.6;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -86,6 +85,11 @@ h1, h2, h3, h4, .logo {
 
 .section {
     padding: var(--space-xl) 0;
+}
+
+#hero, #services, #projects, #contact {
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .grid {
@@ -259,6 +263,101 @@ h1, h2, h3, h4, .logo {
     text-align: center;
 }
 
+/* Секция Обо мне */
+.about {
+    min-height: unset;
+    padding: var(--space-lg) 0;
+}
+
+.about-inner {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+    border-top: 1px solid var(--glass-border);
+    padding-top: var(--space-lg);
+}
+
+.about-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.about-heading {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--text-primary);
+    margin-bottom: calc(var(--space-sm) * 0.5);
+}
+
+.about-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.about-meta-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.about-meta-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+    animation: pulse-dot 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--accent); }
+    50% { opacity: 0.6; box-shadow: 0 0 12px var(--accent); }
+}
+
+.about-text p {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.45;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.about-text strong {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.text-muted {
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .about-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+}
+
 /* Секция Услуг */
 .service-card {
     padding: var(--space-md);
@@ -302,6 +401,96 @@ h1, h2, h3, h4, .logo {
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.6;
+}
+
+/* Секция Как работаю */
+.process {
+    min-height: unset;
+}
+
+.process-inner {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+}
+
+.process-title {
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--text-primary);
+    position: sticky;
+    top: 100px;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+}
+
+.process-step {
+    padding: var(--space-md);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: transform var(--transition-bounce), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.process-step:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.step-number {
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    color: var(--accent);
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.text-muted {
+    color: var(--accent);
+}
+
+.step-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.step-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .process-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .process-title {
+        position: static;
+    }
+
+    .process-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 540px) {
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Карточки проектов */

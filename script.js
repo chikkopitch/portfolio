@@ -128,4 +128,120 @@ document.addEventListener('DOMContentLoaded', () => {
         chatObserver.observe(mockChatContainer);
     }
 
+    // 3.5. Smooth Scroll для ссылок меню и кнопок
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.length > 1) {
+                e.preventDefault();
+                const targetSec = document.querySelector(targetId);
+                if (targetSec) {
+                    const startPosition = window.scrollY || document.documentElement.scrollTop;
+                    const targetPosition = targetSec.offsetTop;
+                    const distance = targetPosition - startPosition;
+                    const duration = 1000;
+                    let start = null;
+
+                    function animation(currentTime) {
+                        if (start === null) start = currentTime;
+                        const timeElapsed = currentTime - start;
+                        const progress = Math.min(timeElapsed / duration, 1);
+                        const ease = progress < 0.5 ? 8 * Math.pow(progress, 4) : 1 - Math.pow(-2 * progress + 2, 4) / 2;
+                        window.scrollTo(0, startPosition + distance * ease);
+                        if (timeElapsed < duration) {
+                            requestAnimationFrame(animation);
+                        }
+                    }
+                    requestAnimationFrame(animation);
+                }
+            }
+        });
+    });
+
+    // 4. Custom Smooth Scroll (Apple-like) БЕЗ ЗАДЕРЖЕК
+    const scrollSections = Array.from(document.querySelectorAll('.section, .footer'));
+    let isScrollThrottled = false;
+
+    window.addEventListener('wheel', (e) => {
+        if (window.innerWidth <= 768) return; // На мобильных оставляем нативный скролл
+        if (e.ctrlKey || e.shiftKey) return;
+        
+        e.preventDefault();
+
+        if (isScrollThrottled) return;
+        
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        const viewportHeight = window.innerHeight;
+        
+        let currentIndex = 0;
+        scrollSections.forEach((sec, index) => {
+            if (!sec) return;
+            if (scrollY >= sec.offsetTop - 50) {
+                currentIndex = index;
+            }
+        });
+
+        const currentSec = scrollSections[currentIndex];
+        if (!currentSec) return;
+
+        const currentTop = currentSec.offsetTop;
+        const currentBottom = currentTop + currentSec.offsetHeight;
+        const viewportBottom = scrollY + viewportHeight;
+
+        let targetPosition = scrollY;
+        const scrollStep = viewportHeight * 0.6; // Шаг скролла внутри высокой секции
+
+        if (e.deltaY > 0) { // Скролл вниз
+            if (Math.ceil(viewportBottom) < currentBottom - 10) {
+                // Если мы внутри высокой секции, скроллим по частям, а не прыгаем
+                targetPosition = Math.min(scrollY + scrollStep, currentBottom - viewportHeight);
+            } else if (currentIndex < scrollSections.length - 1) {
+                targetPosition = scrollSections[currentIndex + 1].offsetTop;
+            }
+        } else if (e.deltaY < 0) { // Скролл вверх
+            if (Math.floor(scrollY) > currentTop + 10) {
+                // Скроллим вверх внутри высокой секции
+                targetPosition = Math.max(scrollY - scrollStep, currentTop);
+            } else if (currentIndex > 0) {
+                const prevSec = scrollSections[currentIndex - 1];
+                if (prevSec.offsetHeight > viewportHeight + 10) {
+                    // Если предыдущая секция высокая, прыгаем к ее НИЖНЕМУ краю
+                    targetPosition = prevSec.offsetTop + prevSec.offsetHeight - viewportHeight;
+                } else {
+                    targetPosition = prevSec.offsetTop;
+                }
+            }
+        }
+
+        if (targetPosition !== scrollY) {
+            isScrollThrottled = true;
+            
+            const distance = targetPosition - scrollY;
+            const duration = 1000;
+            let start = null;
+
+            function animation(currentTime) {
+                if (start === null) start = currentTime;
+                const timeElapsed = currentTime - start;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                const ease = progress < 0.5 ? 8 * Math.pow(progress, 4) : 1 - Math.pow(-2 * progress + 2, 4) / 2;
+
+                window.scrollTo(0, scrollY + distance * ease);
+
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                } else {
+                    window.scrollTo(0, targetPosition);
+                    setTimeout(() => { isScrollThrottled = false; }, 50);
+                }
+            }
+            
+            requestAnimationFrame(animation);
+        } else {
+            isScrollThrottled = true;
+            setTimeout(() => { isScrollThrottled = false; }, 200);
+        }
+    }, { passive: false });
+
 });
